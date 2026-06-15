@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: avfuel
+      POSTGRES_USER: avfuel
+      POSTGRES_PASSWORD: avfuel
+    ports:
+      - "5432:5432"
+    volumes:
+      - avfuel_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U avfuel -d avfuel"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  avfuel_data:

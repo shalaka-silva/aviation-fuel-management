@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: avfuel
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/avfuel
+    username: avfuel
+    password: avfuel
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always

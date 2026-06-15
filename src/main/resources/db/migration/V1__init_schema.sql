@@ -1,0 +1,3 @@
+-- Milestone 0: initial schema placeholder
+-- Business tables will be added in subsequent milestones via new migration files.
+-- Never edit this file after it has been applied.
