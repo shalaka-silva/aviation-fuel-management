@@ -2,6 +2,12 @@ package com.fuelmanagement.common.error;
 
 import com.fuelmanagement.airport.domain.AirportNotFoundException;
 import com.fuelmanagement.airport.domain.DuplicateAirportException;
+import com.fuelmanagement.fuel.domain.DuplicateFuelTypeException;
+import com.fuelmanagement.fuel.domain.FuelTypeNotFoundException;
+import com.fuelmanagement.vendor.domain.DuplicateIntoPlaneAgentException;
+import com.fuelmanagement.vendor.domain.DuplicateVendorException;
+import com.fuelmanagement.vendor.domain.IntoPlaneAgentNotFoundException;
+import com.fuelmanagement.vendor.domain.VendorNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -26,6 +32,42 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DuplicateAirportException.class)
     public ResponseEntity<Map<String, Object>> handleDuplicateAirport(DuplicateAirportException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(errorBody(409, "Conflict", ex.getMessage()));
+    }
+
+    @ExceptionHandler(VendorNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleVendorNotFound(VendorNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(errorBody(404, "Not Found", ex.getMessage()));
+    }
+
+    @ExceptionHandler(DuplicateVendorException.class)
+    public ResponseEntity<Map<String, Object>> handleDuplicateVendor(DuplicateVendorException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(errorBody(409, "Conflict", ex.getMessage()));
+    }
+
+    @ExceptionHandler(IntoPlaneAgentNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleAgentNotFound(IntoPlaneAgentNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(errorBody(404, "Not Found", ex.getMessage()));
+    }
+
+    @ExceptionHandler(DuplicateIntoPlaneAgentException.class)
+    public ResponseEntity<Map<String, Object>> handleDuplicateAgent(DuplicateIntoPlaneAgentException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(errorBody(409, "Conflict", ex.getMessage()));
+    }
+
+    @ExceptionHandler(FuelTypeNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleFuelTypeNotFound(FuelTypeNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(errorBody(404, "Not Found", ex.getMessage()));
+    }
+
+    @ExceptionHandler(DuplicateFuelTypeException.class)
+    public ResponseEntity<Map<String, Object>> handleDuplicateFuelType(DuplicateFuelTypeException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(errorBody(409, "Conflict", ex.getMessage()));
     }
